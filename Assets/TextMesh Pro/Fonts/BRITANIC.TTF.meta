@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7c305c1e517d8024b8b790dd8a48d3aa
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Britannic Bold
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 480e69602afcf1a409b52bb9b8bc0f80, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
