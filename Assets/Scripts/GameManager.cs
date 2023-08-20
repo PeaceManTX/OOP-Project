@@ -21,11 +21,17 @@ public class GameManager : MonoBehaviour
     public GameObject doctorPrefabLoad;
     public GameObject zombiePrefabLoad;
 
+    //
+    // Need static GameObjects to initialize and operate in child classes
+    //
     static GameObject angelPrefab;
     static GameObject devilPrefab;
     static GameObject doctorPrefab;
     static GameObject zombiePrefab;
 
+    //
+    // Character Toggles: all listening is done in Unity Inspector 'On Value Changed'
+    //
     public Toggle angelTog;
     public Toggle devilTog;
     public Toggle doctorTog;
@@ -35,17 +41,15 @@ public class GameManager : MonoBehaviour
     public Zombie zombie;
     public Devil devil;
     public Doctor doctor;
+
+    //
+    // Bools to ensure valid states to create and destroy
+    //
     public bool angelToggled = false;
     public bool devilToggled = false;
     public bool doctorToggled = false;
     public bool zombieToggled = false;
 
-    public float forwardSpeed;
-    public float turnSpeed;
-    float rotationSpeed;
-    float verticalInput;
-    float horizontalInput;
-    float forwardInput;
     Vector3 goForward = new Vector3(8.3f, 4.6f, -18.7f); //Not implemented in this version. Used as placeholder
 
     public enum EntityType { Physical, Spiritual };
@@ -167,6 +171,9 @@ public class GameManager : MonoBehaviour
             }
 
         }
+        //
+        // ENCAPSULATION
+        //
         public string Origin { get; }
         public override string ToString() => $"{(string.IsNullOrEmpty(Origin) ? "" : Origin + ", ")}{Name}";
     }
@@ -196,6 +203,10 @@ public class GameManager : MonoBehaviour
             devilAnim = devilGameObject.GetComponent<Animator>();
             devilAnim.SetBool("Walk", false);
         }
+
+        //
+        // POLYMORPHISM
+        //
         public override bool Move(Vector3 moveToLocation)
         {
             if (base.Move(moveToLocation))
@@ -213,6 +224,9 @@ public class GameManager : MonoBehaviour
             }
 
         }
+        //
+        // ENCAPSULATION
+        //
         public string Origin { get; }
         public override string ToString() => $"{(string.IsNullOrEmpty(Origin) ? "" : Origin + ", ")}{Name}";
     }
@@ -243,6 +257,10 @@ public class GameManager : MonoBehaviour
             doctorAnim = doctorGameObject.GetComponent<Animator>();
             doctorAnim.SetBool("HopWalk", false);
         }
+
+        //
+        // POLYMORPHISM
+        //
         public override bool Move(Vector3 moveToLocation)
         {
             if (base.Move(moveToLocation))
@@ -260,6 +278,9 @@ public class GameManager : MonoBehaviour
             }
 
         }
+        //
+        // ENCAPSULATION
+        //
         public string Origin { get; }
         public override string ToString() => $"{(string.IsNullOrEmpty(Origin) ? "" : Origin + ", ")}{Name}";
     }
@@ -289,6 +310,10 @@ public class GameManager : MonoBehaviour
             zombieAnim = zombieGameObject.GetComponent<Animator>();
             zombieAnim.SetBool("DeadWalk", false);
         }
+
+        //
+        // POLYMORPHISM
+        //
         public override bool Move(Vector3 moveToLocation)
         {
             if (base.Move(moveToLocation))
@@ -306,6 +331,9 @@ public class GameManager : MonoBehaviour
             }
 
         }
+        //
+        // ENCAPSULATION
+        //
         public string Origin { get; }
         public override string ToString() => $"{(string.IsNullOrEmpty(Origin) ? "" : Origin + ", ")}{Name}";
     }
@@ -317,18 +345,6 @@ public class GameManager : MonoBehaviour
         devilPrefab = devilPrefabLoad;
         doctorPrefab  = doctorPrefabLoad;
         zombiePrefab = zombiePrefabLoad;
-
-        //  angelTog.onValueChanged.AddListener((angelTog) =>
-        //  {
-        //      MyListener(angelTog);
-        //  });//Do this in Start() for example
-
-        //ShowLocation(angel);
-        //angel.Move(new Vector3());
-
-        //Debug.Log($"{angel.Name} and {devil.Name} are the same entity: " +
-        //      $"{((Entity)angel).Equals(devil)}");
-        //ShowLocation(devil);
     }
 
     // Update is called once per frame
@@ -338,6 +354,7 @@ public class GameManager : MonoBehaviour
         {
             if (angel.Move(goForward))    //move forward
             {
+                ShowLocation(angel);
                 Debug.Log("Fly Succeeded");  // Placeholder for later..
             }
           
@@ -346,6 +363,7 @@ public class GameManager : MonoBehaviour
         {
             if (devil.Move(goForward))    //move forward
             {
+                ShowLocation(devil);
                 Debug.Log("Walk Succeeded");// Placeholder for later..
             }
 
@@ -354,6 +372,7 @@ public class GameManager : MonoBehaviour
         {
             if (doctor.Move(goForward))    //move forward
             {
+                ShowLocation(doctor);
                 Debug.Log("Hop Walk Succeeded");// Placeholder for later..
             }
 
@@ -362,14 +381,13 @@ public class GameManager : MonoBehaviour
         {
             if (zombie.Move(goForward))    //move forward
             {
+                ShowLocation(zombie);
                 Debug.Log("DeadWalk Succeeded");// Placeholder for later..
             }
 
         }
     }
-    //
-    // ABSTRACTION
-    //
+
     public void CheckToggles()
     {
         if (angelTog.isOn && !angelToggled)
@@ -413,6 +431,9 @@ public class GameManager : MonoBehaviour
             zombieToggled = false;
         }
     }
+    //
+    // ABSTRACTION
+    //
     void CreateAngel()
     {
         Vector3 angelLocation = new Vector3(8.3f, 4.5f, 3f);
@@ -433,6 +454,10 @@ public class GameManager : MonoBehaviour
         Vector3 zombieLocation = new Vector3(-21.1f, 4.2f, 3f);
         zombie = new Zombie("Bud", "Earth", "Brain Eater", zombieLocation);
     }
+
+    //
+    // ABSTRACTION
+    //
     void RemoveAngel()
     {
         GameObject toRemove;
