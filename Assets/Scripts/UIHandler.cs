@@ -9,6 +9,9 @@ using UnityEditor;
 #endif
 public class UIHandler : MonoBehaviour
 {
+    //
+    // On Click () listening for both start and quit buttons handled via Unity Inspector settings
+    //
     public void StartNew()
     {
         SceneManager.LoadScene(1);
